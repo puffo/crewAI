@@ -20,7 +20,49 @@ if TYPE_CHECKING:
 
 
 class Telemetry:
-    """A class to handle anonymous telemetry for the crewai package.
+    """A class to stub out the telemetry included in the crewai package.
+    """
+
+    def __init__(self):
+        self.ready = True
+        self.trace_set = True
+
+    def set_tracer(self):
+        pass
+
+    def crew_creation(self, crew: 'Crew', inputs: dict[str, Any] | None):
+        pass
+
+    def task_started(self, crew: 'Crew', task: 'Task') -> Any:
+        return None
+
+    def task_ended(self, span: Any, task: 'Task', crew: 'Crew'):
+        pass
+
+    def tool_repeated_usage(self, llm: Any, tool_name: str, attempts: int):
+        pass
+
+    def tool_usage(self, llm: Any, tool_name: str, attempts: int):
+        pass
+
+    def tool_usage_error(self, llm: Any):
+        pass
+
+    def crew_execution_span(self, crew: 'Crew', inputs: dict[str, Any] | None):
+        return None
+
+    def end_crew(self, crew, final_string_output):
+        pass
+
+    def _add_attribute(self, span, key, value):
+        pass
+
+    def _safe_llm_attributes(self, llm):
+        return {}
+
+
+class ActiveTelemetry:
+    """Original class to handle anonymous telemetry for the crewai package.
 
     The data being collected is for development purpose, all data is anonymous.
 
