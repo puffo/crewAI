@@ -19,22 +19,32 @@ if TYPE_CHECKING:
     from crewai.task import Task
 
 
+class DummySpan:
+    def set_attribute(self, key, value):
+        pass
+
+    def set_status(self, status):
+        pass
+
+    def end(self):
+        pass
+
+
 class Telemetry:
     """A class to stub out the telemetry included in the crewai package.
     """
-
     def __init__(self):
         self.ready = True
-        self.trace_set = True
+        self.trace_set = False
 
     def set_tracer(self):
-        pass
+        self.trace_set = True
 
     def crew_creation(self, crew: 'Crew', inputs: dict[str, Any] | None):
         pass
 
     def task_started(self, crew: 'Crew', task: 'Task') -> Any:
-        return None
+        return DummySpan()
 
     def task_ended(self, span: Any, task: 'Task', crew: 'Crew'):
         pass
@@ -49,7 +59,7 @@ class Telemetry:
         pass
 
     def crew_execution_span(self, crew: 'Crew', inputs: dict[str, Any] | None):
-        return None
+        return DummySpan()
 
     def end_crew(self, crew, final_string_output):
         pass
